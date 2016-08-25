@@ -3,14 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Events List</title>
-
-<!--
-    <link rel="stylesheet" href="css/base.css" />
--->
-
-
-
-
+    
     <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
     <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
     <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
@@ -25,56 +18,32 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-<!--
-    <script src="/js/react.js"></script>
-    <script src="/js/react-dom.js"></script>
-    <script src="/js/browser.min.js"></script>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/remarkable.min.js"></script>
-
-
-
-    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" />
-
-
-    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" >
-    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" >
-    <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
--->
-
-
     <script charset="utf-8">
     $.ajaxSetup({
       headers: {
         'Authorization': "Bearer 8aef9517-3070-4090-b55e-83296cee8cd1"
       }
     });
-
-    $(function(){
-      //$(".timeline").animate({ width: "100%" }, 10000 );
-    });
     </script>
 
 
     <script src="/js/moment.js"></script>
-
 
     <link rel="stylesheet" href="css/main.css" />
 
   </head>
   <body>
 
-    <div class="wrapper">
-      <div class="contents timeline"></div>
-    </div>
+    <!-- TimeLine -->
+    <div class="wrapper"> <div class="contents timeline"></div> </div>
 
 
-
-
+    <!-- Dom Container -->
     <div class="container">
       <div id="content"></div>
     </div>
 
+    <!-- React components -->
     <script type="text/babel" src="scripts/UserEvents.js"></script>
     <script type="text/babel" src="scripts/UserEventsRow.js"></script>
     <script type="text/babel" src="scripts/UserEventsRowHeader.js"></script>
@@ -83,7 +52,9 @@
 
     <script type="text/babel">
 
-    //https://app-staging.sysdigcloud.com/api/events
+    /*
+      Rendering main component
+    */
     ReactDOM.render(
       <UserEvents source="https://app-staging.sysdigcloud.com/api/events" />,
       document.getElementById('content')
