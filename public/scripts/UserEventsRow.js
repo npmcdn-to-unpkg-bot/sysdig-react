@@ -2,22 +2,25 @@ window.UserEventsRow = React.createClass({
 
 
   getInitialState: function() {
-    //
-    if(this.props.event.id=='13399')
-      console.log(this.props.event);
+    /*
+      Parse date for initial state
+    */
     var timestamp = this.props.event.createdOn;
     var date = moment.unix(timestamp).format("MM/DD/YYYY")
     var time = moment.unix(timestamp).format("HH:MM")
 
 
     return ({
-      timestamp: timestamp,
       date: date,
       time: time
-
     });
   },
 
+
+  /*
+    Used for dinamic class,
+    to change color to severity badge
+  */
   dynamicClass: function(){
      return "col-xs-2 severity severity" + this.props.event.severity
   },
@@ -25,8 +28,8 @@ window.UserEventsRow = React.createClass({
 
     return (
       <div className="itemContainer">
-        <div className="row itemData">
 
+        <div className="row itemData">
 
           <div className="col-xs-2 date">
             {this.state.date}
@@ -41,17 +44,19 @@ window.UserEventsRow = React.createClass({
           <div className={this.dynamicClass()}>
             <span>{this.props.event.severity}</span>
           </div>
+
           <div className="col-xs-2 tags">
-          {this.props.event.tags.source}
+            {this.props.event.tags.source}
           </div>
 
         </div>
+
         <div className="row itemDescription">
           <p>
             {this.props.event.description}
           </p>
-
         </div>
+
       </div>
     );
   }
