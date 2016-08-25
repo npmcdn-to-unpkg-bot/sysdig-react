@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Events List</title>
+
+    <link rel="stylesheet" href="css/base.css" />
+
+
+<!--
+
+
+
+    <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+
+    <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+    <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+-->
+
+    <script src="/js/react.js"></script>
+    <script src="/js/react-dom.js"></script>
+    <script src="/js/browser.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/remarkable.min.js"></script>
+
+
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css" />
+
+
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" >
+    <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+
+
+    <script charset="utf-8">
+    $.ajaxSetup({
+      headers: {
+        'Authorization': "Bearer 8aef9517-3070-4090-b55e-83296cee8cd1"
+      }
+    });
+    </script>
+  </head>
+  <body>
+
+    <div class="row">
+      <div class="col-md-6">
+        <i class="fa fa-user"></i> Us
+      </div>
+      <div class="col-md-6">
+        <i class="fa fa-user"></i> U2
+      </div>
+    </div>
+
+
+    <div id="content"></div>
+    <!--
+    <script type="text/babel" src="scripts/example.js"></script>
+    -->
+    <script type="text/babel">
+
+
+
+    var UserEvents = React.createClass({
+      getInitialState: function() { return { } },
+
+
+      /*
+        Get the json from the API end Point
+      */
+      fetchData: function(){
+        this.serverRequest = $.get(this.props.source, function (result) {
+          /*
+            Set the state passing the events array
+          */
+          this.setState({
+            lastEvents : result.events
+          });
+        }.bind(this));
+      },
+
+      componentDidMount: function() {
+        /*
+          Fetch data first
+        */
+        this.fetchData();
+
+        /*
+          Fetch data every 30 seconds
+        */
+        var _this = this
+        setInterval(function(){
+          _this.fetchData();
+        }, 30000);
+
+
+      },
+
+      componentWillUnmount: function() {
+        this.serverRequest.abort();
+      },
+
+
+
+      render: function() {
+        console.log("this.state!!!");
+        console.log(this.state.lastEvents);
+        if(this.state.lastEvents){
+          return (
+            <div>
+
+
+
+              <RefreshBtn fetchData={this.fetchData} />
+
+              {this.state.lastEvents.map(function(event){
+                return <UserEventsRow key={event.id} event={event} />;
+              })}
+            </div>
+          );
+        }else{
+          return (
+            <div>
+
+              Loading ...
+
+            </div>
+          );
+        }
+
+      }
+
+    });
+
+
+
+    var RefreshBtn = React.createClass({
+      render: function() {
+        return (
+          <a onClick={this.props.fetchData}>refresh</a>
+        );
+      }
+    });
+
+    var UserEventsRow = React.createClass({
+      render: function() {
+        return (
+          <div>
+            id: {this.props.event.id}
+          </div>
+        );
+      }
+    });
+
+    //https://app-staging.sysdigcloud.com/api/events
+    ReactDOM.render(
+      <UserEvents source="test.json" />,
+      document.getElementById('content')
+    );
+
+
+    </script>
+  </body>
+</html>
