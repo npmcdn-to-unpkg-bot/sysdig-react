@@ -1,0 +1,87 @@
+@import 'https://fonts.googleapis.com/css?family=Ubuntu';
+
+.wrapper {width: 100%;}
+.wrapper .contents {
+  width: 0%;
+  border-top: 3px red solid;
+}
+
+
+.tableContainer{
+    margin: 21px 0 0 0;
+}
+
+a.refreshBtn{
+  position: fixed;
+  top: 3px;
+  right: 5px;
+  z-index: 99999;
+}
+
+.headerRow{
+  background: #0372ec;
+  padding: 15px 5px 15px 5px;
+  color: #ffffff;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 15px;
+
+}
+
+
+.loading{
+  position: fixed;
+  top: 0;
+  z-index: 99999;
+  width: 150px;
+    height: 150px;
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+}
+
+
+.itemData{
+  padding: 15px 5px 15px 5px;
+  background: #efefef;
+}
+
+.itemDescription{
+  padding: 3px;
+  background: #cfcfcf;
+  margin-bottom: 3px;
+}
+
+.itemDescription p{
+  border-radius: 3px;
+  background-color: #ffffff;
+  padding: 9px;
+  max-height: 120px;
+  overflow: auto;
+  font-size:12px;
+}
+
+.itemData .severity{
+  text-align: center;
+}
+.itemData .severity span{
+  border-radius: 50%;
+  background-color: orange;
+  font-size: 15px;
+  color:#ffffff;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.itemData .severity5 span,
+.itemData .severity6 span,
+.itemData .severity7 span,
+.itemData .severity8 span,
+.itemData .severity9 span{
+  background-color: red;
+}
